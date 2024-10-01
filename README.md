@@ -11,7 +11,7 @@ The benchmark functions are:
 
 **Friedman multioutput inverse problem**
 
-
+----------------------------------------------
 The data and models can be downloaded at: https://drive.google.com/file/d/1LPfFfEnR7UucaPESJIX_bjnRG5T0RNbM/view?usp=sharing
 
 It is neccessary to unpack the .zip in the InverseBench main directory. The inconel photonic surface data are already available on git.
