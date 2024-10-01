@@ -55,7 +55,7 @@ sys.path.insert(0, 'src')
 from benchmarks import * #import everything from the benchmark module
 
 name = 'airfoil_benchmark' #define the name of the benchmark function
-model = load_model(name).load_model() #load the forward model
+model = load_model(name).load() #load the forward model
 f = benchmark_functions(name, model) #load the benchmark function
 lb, ub = f.get_bounds() #get lower and upper boundaries
 

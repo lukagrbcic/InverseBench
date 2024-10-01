@@ -12,7 +12,7 @@ class load_model:
         
         self.f_name = f_name
         
-    def load_model(self):
+    def load(self):
         
         if self.f_name == 'inconel_benchmark':
             
