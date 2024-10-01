@@ -1,5 +1,5 @@
 # InverseBench
-Inverse design benchmark suite that containts problems from science and engineering.
+Inverse design benchmark suite that containts inverse problems from science and engineering.
 
 The benchmark functions are:
 
