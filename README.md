@@ -26,6 +26,11 @@ It is neccessary to unpack the .zip in the InverseBench main directory. The inco
 
 ```python
 
+import sys
+sys.path.insert(0, 'src')
+
+from benchmarks import * #import everything from the benchmark module
+
 name = 'friedman_multioutput_benchmark' #define the name of the benchmark function
 f = benchmark_functions(name) #load the benchmark function
 lb, ub = f.get_bounds() #get lower and upper boundaries
@@ -43,6 +48,11 @@ y = evaluation_function([np.random.uniform(lb, ub), np.random.uniform(lb, ub)]) 
 
 
 ```python
+
+import sys
+sys.path.insert(0, 'src')
+
+from benchmarks import * #import everything from the benchmark module
 
 name = 'airfoil_benchmark' #define the name of the benchmark function
 model = load_model(name).load_model() #load the forward model
