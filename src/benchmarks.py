@@ -30,7 +30,7 @@ class load_model:
         if self.f_name == 'scalar_diffusion_benchmark':
             
             model_path = os.path.join(script_dir, '../models/scalar_diffusion_models/scalar_diffusion_model.pkl')
-            moodel = joblib.load(model_path)
+            model = joblib.load(model_path)
         
         return model
     
@@ -62,7 +62,7 @@ class benchmark_functions:
         if self.f_name == 'friedman_multioutput_benchmark':
             
             lb = np.zeros(5)
-            ub = np.zeros(5)
+            ub = np.ones(5)
             
         return lb, ub
     
