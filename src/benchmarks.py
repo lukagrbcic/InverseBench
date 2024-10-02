@@ -1,9 +1,7 @@
 import numpy as np
 import joblib
 import sys
-import xgboost 
-
-# sys.path.insert(0,'models/inconel_model')
+import os
 
 
 class load_model:
@@ -14,19 +12,25 @@ class load_model:
         
     def load(self):
         
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+       
         if self.f_name == 'inconel_benchmark':
             
-            ml_model = joblib.load('models/inconel_models/inconel_model.pkl')
-            pca = joblib.load('models/inconel_models/inconel_pca.pkl')
+            ml_model_path = os.path.join(script_dir, '../models/inconel_models/inconel_model.pkl')
+            pca_path = os.path.join(script_dir, '../models/inconel_models/inconel_pca.pkl')
+            ml_model = joblib.load(ml_model_path)
+            pca = joblib.load(pca_path)
             model = (pca, ml_model)    
         
         if self.f_name == 'airfoil_benchmark':
         
-            model = joblib.load('models/airfoil_models/airfoil_model.pkl')
+            model_path = os.path.join(script_dir, '../models/airfoil_models/airfoil_model.pkl')
+            model = joblib.load(model_path)
         
         if self.f_name == 'scalar_diffusion_benchmark':
             
-            model = joblib.load('models/scalar_diffusion_models/scalar_diffusion_model.pkl')
+            model_path = os.path.join(script_dir, '../models/scalar_diffusion_models/scalar_diffusion_model.pkl')
+            moodel = joblib.load(model_path)
         
         return model
     
