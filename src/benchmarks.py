@@ -58,7 +58,7 @@ class benchmark_functions:
             
             lb = np.zeros(20)
             ub = np.ones(20)*30
-        
+              
         if self.f_name == 'friedman_multioutput_benchmark':
             
             lb = np.zeros(5)
