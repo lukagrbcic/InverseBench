@@ -31,6 +31,10 @@ class load_model:
             
             model_path = os.path.join(script_dir, '../models/scalar_diffusion_models/scalar_diffusion_model.pkl')
             model = joblib.load(model_path)
+            
+        if self.f_name == 'friedman_multioutput_benchmark':
+            
+            model = None
         
         return model
     
