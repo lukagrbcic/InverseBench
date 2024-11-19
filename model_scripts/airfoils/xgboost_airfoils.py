@@ -17,22 +17,22 @@ y = cp
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=True, random_state=23)
 X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1, shuffle=True, random_state=23)
 
-np.save('input_train_data.npy', X_train)
-np.save('output_train_data.npy', y_train)
+# np.save('input_train_data.npy', X_train)
+# np.save('output_train_data.npy', y_train)
 
 
-np.save('input_test_data.npy', X_test)
-np.save('output_test_data.npy', y_test)
+# np.save('input_test_data.npy', X_test)
+# np.save('output_test_data.npy', y_test)
 
-import sys
-sys.exit()
-
-
+# import sys
+# sys.exit()
 
 
-# dtrain = xgb.DMatrix(X_train, label=y_train)
-# dval = xgb.DMatrix(X_val, label=y_val)
-# dtest = xgb.DMatrix(X_test, label=y_test)
+
+
+dtrain = xgb.DMatrix(X_train, label=y_train)
+dval = xgb.DMatrix(X_val, label=y_val)
+dtest = xgb.DMatrix(X_test, label=y_test)
 
 # params = {
 #     'objective': 'reg:squarederror',
@@ -74,39 +74,74 @@ model.fit(
     verbose=True
 )
 
+results = model.evals_result()
 
 
-joblib.dump(model, 'airfoil_model.pkl')
+# Get training and validation errors
+training_errors = results['validation_0']['rmse']
+validation_errors = results['validation_1']['rmse']
+
+epochs = len(training_errors)
+x_axis = range(0, epochs)
+
+plt.figure(figsize=(6, 5))
+plt.plot(x_axis, training_errors, label='Train', color='red')
+plt.plot(x_axis, validation_errors, label='Validation', color='blue')
+plt.xlabel('Epochs')
+plt.ylabel('RMSE')
+# plt.title('XGBoost RMSE Over Epochs')
+plt.legend()
+plt.savefig('airfoil_loss_curve.pdf', dpi=300)
+# plt.grid(True)
+# plt.show()
+
+# y_test_pred = model.predict(X_test)
 
 
-def calculate_rmse(y_true, y_pred):   
-    rmse = np.mean(np.array([np.sqrt(mean_squared_error(y_true[i], y_pred[i])) for i in range(len(y_pred))]))
-    return rmse
+# rmse = np.sqrt(mean_squared_error(y_test, y_test_pred))
 
 
-def calculate_mape(y_true, y_pred):   
-    mape = np.mean(np.array([mean_absolute_percentage_error(y_true[i], y_pred[i]) for i in range(len(y_pred))]))
-    return mape
+# print (rmse)
+
+# joblib.dump(model, 'airfoil_model.pkl')
 
 
-# Evaluate on validation set
-y_val_pred = model.predict(X_val)
-val_rmse_per_target = calculate_rmse(y_val, y_val_pred)
-print("Validation RMSE per target:", val_rmse_per_target)
-print("Average Validation RMSE:", np.mean(val_rmse_per_target))
+# def calculate_rmse(y_true, y_pred):   
+#     rmse = np.mean(np.array([np.sqrt(mean_squared_error(y_true[i], y_pred[i])) for i in range(len(y_pred))]))
+#     return rmse
+
+
+# def calculate_mape(y_true, y_pred):   
+#     mape = np.mean(np.array([mean_absolute_percentage_error(y_true[i], y_pred[i]) for i in range(len(y_pred))]))
+#     return mape
+
+
+# # Evaluate on validation set
+# y_val_pred = model.predict(X_val)
+# val_rmse_per_target = calculate_rmse(y_val, y_val_pred)
+# print("Validation RMSE per target:", val_rmse_per_target)
+# print("Average Validation RMSE:", np.mean(val_rmse_per_target))
 
 # Evaluate on test set
-y_test_pred = model.predict(X_test)
-test_rmse_per_target = calculate_rmse(y_test, y_test_pred)
-print("\nTest RMSE per target:", test_rmse_per_target)
-print("Average Test RMSE:", np.mean(test_rmse_per_target))
+# y_test_pred = model.predict(X_test)
+# # test_rmse_per_target = calculate_rmse(y_test, y_test_pred)
+# print("\nTest RMSE per target:", test_rmse_per_target)
+# print("Average Test RMSE:", np.mean(test_rmse_per_target))
+
+
+# # Evaluate on test set
+# y_test_pred = model.predict(X_test)
+# test_rmse_per_target = calculate_rmse(y_test, y_test_pred)
+# print("\nTest RMSE per target:", test_rmse_per_target)
+# print("Average Test RMSE:", np.mean(test_rmse_per_target))
+
 
 
 # Evaluate on test set
 # y_test_pred = model.predict(dtest)
-test_mape_per_target = calculate_mape(y_test, y_test_pred)
-print("\nTest MAPE per target:", test_mape_per_target)
-print("Average Test MAPE:", np.mean(test_mape_per_target))
+# test_mape_per_target = calculate_mape(y_test, y_test_pred)
+# print("\nTest MAPE per target:", test_mape_per_target)
+# print("Average Test MAPE:", np.mean(test_mape_per_target))
 
 #TODO ADD PLOTS!
 
@@ -147,18 +182,5 @@ print("Average Test MAPE:", np.mean(test_mape_per_target))
 #     # plt.plot(y_test_pred[i, 0], 'go')
   
 
-
-# # val_scores = model.eval_set([(dval, 'val')])
-
-# # # # Extract RMSE values and convert to a list
-# # val_rmse = [float(score.split(':')[1]) for score in val_scores]
-
-# # # Plot the validation loss
-# # plt.figure(figsize=(10, 6))
-# # plt.plot(range(1, len(val_rmse) + 1), val_rmse)
-# # plt.title('XGBoost Validation RMSE over Iterations')
-# # plt.xlabel('Iterations')
-# # plt.ylabel('Validation RMSE')
-# # plt.show()
 
 
