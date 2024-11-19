@@ -26,6 +26,11 @@ y = cp
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=True, random_state=23)
 X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1, shuffle=True, random_state=23)
 
+
+
+
+
+
 # np.save('input_train_data.npy', X_train)
 # np.save('output_train_data.npy', y_train)
 
@@ -105,7 +110,7 @@ print (r2_single)
 
 
 plt.figure(figsize=(6, 5))
-plt.hist(rmse_i, bins=50, color='blue')
+plt.hist(rmse_i, bins=50, color='green')
 plt.xlabel('RMSE')
 plt.ylabel('Predictions')
 # plt.title('XGBoost RMSE Over Epochs')
@@ -115,22 +120,22 @@ for axis in ['top', 'bottom', 'left', 'right']:
     ax.spines[axis].set_linewidth(2)
 
 plt.tight_layout()
-plt.savefig('airfoil_rmse_bins.pdf', dpi=300)
+plt.savefig('figa1a.pdf', dpi=300)
 
 
-plt.figure(figsize=(6, 5))
-plt.hist(r2_i, bins=50, color='green')
-plt.xlabel('R$^2$')
-plt.ylabel('Predictions')
-plt.xlim(0.9, 1)
-# plt.title('XGBoost RMSE Over Epochs')
-# plt.legend()
-ax = plt.gca()
-for axis in ['top', 'bottom', 'left', 'right']:
-    ax.spines[axis].set_linewidth(2)
+# plt.figure(figsize=(6, 5))
+# plt.hist(r2_i, bins=50, color='green')
+# plt.xlabel('R$^2$')
+# plt.ylabel('Predictions')
+# plt.xlim(0.9, 1)
+# # plt.title('XGBoost RMSE Over Epochs')
+# # plt.legend()
+# ax = plt.gca()
+# for axis in ['top', 'bottom', 'left', 'right']:
+#     ax.spines[axis].set_linewidth(2)
 
-plt.tight_layout()
-plt.savefig('airfoil_r2_bins.pdf', dpi=300)
+# plt.tight_layout()
+# plt.savefig('airfoil_r2_bins.pdf', dpi=300)
 
 
 
@@ -143,7 +148,7 @@ x_axis = range(0, epochs)
 
 plt.figure(figsize=(6, 5))
 plt.plot(x_axis, training_errors, label='Train', color='red')
-plt.plot(x_axis, validation_errors, label='Validation', color='blue')
+plt.plot(x_axis, validation_errors, label='Validation', color='green')
 plt.xlabel('Epochs')
 plt.ylabel('RMSE')
 # plt.title('XGBoost RMSE Over Epochs')
@@ -153,10 +158,68 @@ for axis in ['top', 'bottom', 'left', 'right']:
     ax.spines[axis].set_linewidth(2)
 
 plt.tight_layout()
-plt.savefig('airfoil_loss_curve.pdf', dpi=300)
+plt.savefig('figa1b.pdf', dpi=300)
 
 
 
+
+# k = 1
+# plt.figure(figsize=(6, 5))
+
+
+# y_test_half = y_test[k][:int(0.5*len(y_test))]
+# y_test_half_2 = y_test[k][int(0.5*len(y_test)):]
+
+
+# plt.plot(np.arange(0, len(y_test[k]), 1), y_test[k], 'r-', label='Ground truth')
+# # plt.plot(np.arange(0, len(y_pred[k]), 1), y_pred[k], 'g-', label=f'Prediction, RMSE = {np.sqrt(np.sqrt(mean_squared_error(y_test[k], y_pred[k]))):.3f}')
+# plt.legend()
+# ax = plt.gca()
+# # plt.ylim(0,30)
+# for axis in ['top', 'bottom', 'left', 'right']:
+#     ax.spines[axis].set_linewidth(2)
+
+# plt.tight_layout()
+    
+# plt.savefig('figa1c.pdf', dpi=300)
+
+
+
+
+k = 1208
+plt.figure(figsize=(6, 5))
+
+
+y_test_half = y_test[k][:int(0.5*len(y_test[k]))+1]
+y_test_half_2 = y_test[k][int(0.5*len(y_test[k])):]
+
+
+plt.plot(np.linspace(0, 1, len(y_test_half)), y_test_half[::-1], 'r-', label='Ground truth')
+plt.plot(np.linspace(0, 1, len(y_test_half_2)), y_test_half_2, 'r-')
+
+
+
+y_pred_half = y_pred[k][:int(0.5*len(y_pred[k]))+1]
+y_pred_half_2 = y_pred[k][int(0.5*len(y_pred[k])):]
+
+
+plt.plot(np.linspace(0, 1, len(y_pred_half)), y_test_half[::-1], 'g-', label=f'Prediction, RMSE = {np.sqrt(mean_squared_error(y_test[k], y_pred[k])):.3f}')
+plt.plot(np.linspace(0, 1, len(y_pred_half_2)), y_pred_half_2, 'g-')
+
+
+# plt.plot(np.arange(0, len(y_pred[k]), 1), y_pred[k], 'g-', label=f'Prediction, RMSE = {np.sqrt(np.sqrt(mean_squared_error(y_test[k], y_pred[k]))):.3f}')
+plt.legend()
+ax = plt.gca()
+# plt.ylim(0,30)
+for axis in ['top', 'bottom', 'left', 'right']:
+    ax.spines[axis].set_linewidth(2)
+
+# plt.tight_layout()
+    
+plt.xlabel('$\zeta_x$')
+plt.ylabel('$\mathbf{C_p}$')
+
+plt.savefig('figa1c.pdf', dpi=300)
 
 
 
