@@ -2,9 +2,18 @@ import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error, r2_score
 import matplotlib.pyplot as plt
 import joblib
+
+
+plt.rcParams.update({
+    "text.usetex": True,
+    'font.family': 'sans-serif',
+    'text.latex.preamble': r'\usepackage{sfmath} \sffamily \usepackage{upgreek}',
+    "font.size": 18,
+})
+
 
 np.random.seed(4)
 
@@ -74,10 +83,58 @@ model.fit(
     verbose=True
 )
 
+
+
+def calculate_rmse(y_true, y_pred):   
+    rmse = np.mean(np.array([np.sqrt(mean_squared_error(y_true[i], y_pred[i])) for i in range(len(y_pred))]))
+    return rmse
+
+
+y_pred = model.predict(X_test)
+
+rmse_i = np.array([np.sqrt(mean_squared_error(y_test[i], y_pred[i])) for i in range(len(y_pred))])
+r2_i = np.array([r2_score(y_test[i], y_pred[i]) for i in range(len(y_pred))])
+
+
+rmse_single = np.sqrt(mean_squared_error(y_test, y_pred))
+r2_single = r2_score(y_test, y_pred)
+
+
+print (rmse_single)
+print (r2_single)
+
+
+plt.figure(figsize=(6, 5))
+plt.hist(rmse_i, bins=50, color='blue')
+plt.xlabel('RMSE')
+plt.ylabel('Predictions')
+# plt.title('XGBoost RMSE Over Epochs')
+# plt.legend()
+ax = plt.gca()
+for axis in ['top', 'bottom', 'left', 'right']:
+    ax.spines[axis].set_linewidth(2)
+
+plt.tight_layout()
+plt.savefig('airfoil_rmse_bins.pdf', dpi=300)
+
+
+plt.figure(figsize=(6, 5))
+plt.hist(r2_i, bins=50, color='green')
+plt.xlabel('R$^2$')
+plt.ylabel('Predictions')
+plt.xlim(0.9, 1)
+# plt.title('XGBoost RMSE Over Epochs')
+# plt.legend()
+ax = plt.gca()
+for axis in ['top', 'bottom', 'left', 'right']:
+    ax.spines[axis].set_linewidth(2)
+
+plt.tight_layout()
+plt.savefig('airfoil_r2_bins.pdf', dpi=300)
+
+
+
 results = model.evals_result()
-
-
-# Get training and validation errors
 training_errors = results['validation_0']['rmse']
 validation_errors = results['validation_1']['rmse']
 
@@ -91,9 +148,17 @@ plt.xlabel('Epochs')
 plt.ylabel('RMSE')
 # plt.title('XGBoost RMSE Over Epochs')
 plt.legend()
+ax = plt.gca()
+for axis in ['top', 'bottom', 'left', 'right']:
+    ax.spines[axis].set_linewidth(2)
+
+plt.tight_layout()
 plt.savefig('airfoil_loss_curve.pdf', dpi=300)
-# plt.grid(True)
-# plt.show()
+
+
+
+
+
 
 # y_test_pred = model.predict(X_test)
 
