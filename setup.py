@@ -27,6 +27,7 @@ setup(
         '': [                   # This applies to all packages
             'data/**/*',       # Include all files in the data directory and subdirectories
             'models/**/*',     # Include all files in the models directory and subdirectories
+            'test_data/**/*',
         ],
     },
 
