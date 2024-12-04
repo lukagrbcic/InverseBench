@@ -1,10 +1,4 @@
 __pycache__
-/data/airfoil_data/input_data.npy
-/data/airfoil_data/input_test_data.npy
-/data/airfoil_data/output_data.npy
-/data/airfoil_data/output_test_data.npy
-/data/scalar_diffusion_data/bcs.txt
-/data/scalar_diffusion_data/probes.txt
 /generate_test_data.py
 /model_scripts/airfoils/airfoil_loss_curve.pdf
 /model_scripts/airfoils/airfoil_model.pkl
