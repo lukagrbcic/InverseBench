@@ -1,7 +1,7 @@
 # InverseBench
 Inverse design benchmark suite that containts inverse problems from science and engineering.
 
-Requirements are in the requirements are in the requirements.txt file. To install them just use
+Requirements are in the requirements are in the requirements.txt file. To install them just use:
 
 ```bash
 pip install requrements.txt
