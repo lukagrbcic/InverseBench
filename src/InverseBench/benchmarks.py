@@ -27,7 +27,51 @@ class load_model:
             model = None
         
         return model
+
+class load_test_data:
     
+    def __init__(self, f_name):
+        self.f_name = f_name
+        
+    def load(self):
+        if self.f_name == 'inconel_benchmark':
+            
+            with resources.path('InverseBench.test_data.inconel_data', 'input_test_data.npy') as input_data_path:
+                input_test_data = np.load(str(input_data_path))
+            with resources.path('InverseBench.test_data.inconel_data', 'output_test_data.npy') as output_data_path:                
+                output_test_data = np.load(str(output_data_path))
+                
+            test_data = (input_test_data, output_test_data)
+
+        elif self.f_name == 'airfoil_benchmark':
+            
+            with resources.path('InverseBench.test_data.airfoils_data', 'input_test_data.npy') as input_data_path:
+                input_test_data = np.load(str(input_data_path))
+            with resources.path('InverseBench.test_data.airfoils_data', 'output_test_data.npy') as output_data_path:                
+                output_test_data = np.load(str(output_data_path))
+                
+            test_data = (input_test_data, output_test_data)
+            
+        elif self.f_name == 'scalar_diffusion_benchmark':
+            
+            with resources.path('InverseBench.test_data.scalar_diffusion_data', 'input_test_data.npy') as input_data_path:
+                input_test_data = np.load(str(input_data_path))
+            with resources.path('InverseBench.test_data.scalar_diffusion_data', 'output_test_data.npy') as output_data_path:                
+                output_test_data = np.load(str(output_data_path))
+                
+            test_data = (input_test_data, output_test_data)
+            
+        elif self.f_name == 'friedman_multioutput_benchmark':
+            
+            with resources.path('InverseBench.test_data.friedman_data', 'input_test_data.npy') as input_data_path:
+                input_test_data = np.load(str(input_data_path))
+            with resources.path('InverseBench.test_data.friedman_data', 'output_test_data.npy') as output_data_path:                
+                output_test_data = np.load(str(output_data_path))
+                
+            test_data = (input_test_data, output_test_data)
+        
+        return test_data
+
 
 class benchmark_functions:
     
