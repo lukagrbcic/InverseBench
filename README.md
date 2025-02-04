@@ -50,4 +50,5 @@ cp = evaluation_function([np.random.uniform(lb, ub), np.random.uniform(lb, ub)])
 
 ```
 
-
+# License
+The licensing of this project is in progress by Berkeley Lab.
