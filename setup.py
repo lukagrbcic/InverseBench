@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='InverseBench',  
+    name='InverseBlackBox',
     version='0.1.0',      
     author='Luka Grbcic',      
     author_email='lgrbcic@lbl.gov',      
-    description='An inverse design problem benchmark suite',
+    description='An inverse design black box problem benchmark suite',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',  
-    url='https://github.com/lukagrbcic/InverseBench/', 
+    url='https://github.com/lukagrbcic/InverseBlackBox/',
     
     # Set packages with proper location
     packages=find_packages(where='src'),  # Search for packages in the src directory

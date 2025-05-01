@@ -1,5 +1,5 @@
 import numpy as np
-from InverseBench.benchmarks import load_model, benchmark_functions, load_test_data
+from InverseBlackBox.benchmarks import load_model, benchmark_functions, load_test_data
 
 name = 'inconel_benchmark'
 model = load_model(name).load()
