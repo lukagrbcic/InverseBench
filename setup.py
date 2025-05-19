@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='InverseBlackBox',
-    version='0.1.0',      
+    version='0.0.1',
     author='Luka Grbcic',      
     author_email='lgrbcic@lbl.gov',      
     description='An inverse design black box problem benchmark suite',
