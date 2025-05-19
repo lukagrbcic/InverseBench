@@ -1,4 +1,4 @@
-# InverseBlackBox
+# InverseBench - A blackbox inverse design benchmark suite
 Inverse design benchmark suite that contains black box inverse problems from science and engineering.
 
 Requirements are in the requirements are in the requirements.txt file. To install them just use:
@@ -21,7 +21,7 @@ The benchmark functions are:
 ----------------------------------------------
 The models can be downloaded at: https://drive.google.com/file/d/1LPfFfEnR7UucaPESJIX_bjnRG5T0RNbM/view?usp=sharing
 
-It is neccessary to unpack the .zip in the InverseBlackBox main directory. The data are already available on the github repository.
+It is neccessary to unpack the .zip in the InverseBench main directory. The data are already available on the github repository.
 
 
 **examples.py** contains examples on how to access all of the four benchmark functions.
@@ -34,7 +34,7 @@ It is neccessary to unpack the .zip in the InverseBlackBox main directory. The d
 ```python
 
 import numpy as np
-from InverseBlackBox.benchmarks import load_model, benchmark_functions #import required modules for the benchmarks
+from InverseBench.benchmarks import load_model, benchmark_functions #import required modules for the benchmarks
 
 name = 'airfoil_benchmark' #define the name of the benchmark function
 model = load_model(name).load() #load the forward model
