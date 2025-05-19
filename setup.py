@@ -8,7 +8,7 @@ setup(
     description='An inverse design black box problem benchmark suite',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',  
-    url='https://github.com/lukagrbcic/InverseBlackBox/',
+    url='https://github.com/lukagrbcic/InverseBench/',
     
     # Set packages with proper location
     packages=find_packages(where='src'),  # Search for packages in the src directory
@@ -34,7 +34,7 @@ setup(
     install_requires=[         
         'numpy>=1.24.3',
         'xgboost==2.0.3',
-        'scikit-learn==1.2.2',
-        'joblib==1.2.0',
+        'scikit-learn>=1.2.2',
+        'joblib>=1.2.0',
     ],
 )
