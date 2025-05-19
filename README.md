@@ -1,6 +1,14 @@
 # InverseBench - A blackbox inverse design benchmark suite
 Inverse design benchmark suite that contains black box inverse problems from science and engineering.
 
+The fastest way to install the module is just to use pip in the main directory (will be updated):
+
+
+```bash
+pip install .
+```
+
+
 Requirements are in the requirements are in the requirements.txt file. To install them just use:
 
 ```bash
