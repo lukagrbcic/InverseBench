@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='InverseBlackBox',
+    name='InverseBench',
     version='0.0.1',
     author='Luka Grbcic',      
     author_email='lgrbcic@lbl.gov',      
